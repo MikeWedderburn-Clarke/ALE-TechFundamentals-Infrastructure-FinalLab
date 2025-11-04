@@ -1,0 +1,26 @@
+# Example Terraform variables file
+# Copy this file to terraform.tfvars and customize the values
+
+# Resource Group Configuration
+resource_group_name = "rg-webapp-demo"
+location            = "eastus"
+
+# Storage Account (must be globally unique, 3-24 lowercase letters and numbers)
+# IMPORTANT: Change this to a unique value! Consider adding random numbers.
+# Example: stwebapp12345, mystorageacct999, etc.
+storage_account_name = "stwebappdemo"
+
+# App Service Plan
+app_service_plan_name = "asp-webapp-demo"
+
+# App Service (must be globally unique)
+# IMPORTANT: Change this to a unique value! Consider adding random numbers or your initials.
+# Example: myapp-12345, webapp-jdoe-001, etc.
+app_service_name = "app-webapp-demo"
+
+# Tags
+tags = {
+  Environment = "Demo"
+  Project     = "WebApp"
+  ManagedBy   = "Terraform"
+}
