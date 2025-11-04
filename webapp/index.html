@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Web App Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #0078d4;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .info {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f4fd;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .info p {
+            margin: 10px 0;
+        }
+        .footer {
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Azure Web App Demo</h1>
+        <p>This is a simple HTML page hosted on Azure App Service</p>
+        
+        <img id="azureImage" src="" alt="Azure Logo from Blob Storage">
+        
+        <div class="info">
+            <p><strong>Infrastructure Details:</strong></p>
+            <ul>
+                <li>Hosted on Azure App Service</li>
+                <li>Image served from Azure Blob Storage</li>
+                <li>Infrastructure managed with Terraform</li>
+                <li>Ready for multi-region expansion</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>Powered by Azure | Infrastructure as Code with Terraform</p>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        // Get the blob container URL from config
+        const blobContainerUrl = window.AZURE_CONFIG.blobContainerUrl;
+        const imageName = window.AZURE_CONFIG.imageName;
+        const imageUrl = `${blobContainerUrl}/${imageName}`;
+        
+        // Set the image source
+        document.getElementById('azureImage').src = imageUrl;
+        
+        // Handle image load errors
+        document.getElementById('azureImage').onerror = function() {
+            this.alt = 'Image not available - Please ensure blob storage is configured correctly';
+            this.style.display = 'none';
+        };
+    </script>
+</body>
+</html>
