@@ -14,6 +14,9 @@ param locationUKWest string = 'ukwest'
 @description('The SKU for the App Service Plan')
 param appServicePlanSku string = 'B1'
 
+@description('The tier for the App Service Plan')
+param appServicePlanTier string = 'Basic'
+
 // Variables
 var appServicePlanNameUKSouth = '${baseName}-asp-${locationUKSouth}-${environment}'
 var appServicePlanNameUKWest = '${baseName}-asp-${locationUKWest}-${environment}'
@@ -26,7 +29,7 @@ resource appServicePlanUKSouth 'Microsoft.Web/serverfarms@2022-09-01' = {
   location: locationUKSouth
   sku: {
     name: appServicePlanSku
-    tier: 'Basic'
+    tier: appServicePlanTier
     capacity: 1
   }
   kind: 'linux'
@@ -41,7 +44,7 @@ resource appServicePlanUKWest 'Microsoft.Web/serverfarms@2022-09-01' = {
   location: locationUKWest
   sku: {
     name: appServicePlanSku
-    tier: 'Basic'
+    tier: appServicePlanTier
     capacity: 1
   }
   kind: 'linux'

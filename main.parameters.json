@@ -16,6 +16,9 @@
     },
     "appServicePlanSku": {
       "value": "B1"
+    },
+    "appServicePlanTier": {
+      "value": "Basic"
     }
   }
 }

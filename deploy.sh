@@ -39,8 +39,10 @@ az group create \
 echo ""
 
 # Deploy Bicep template
-echo "Deploying Bicep template..."
+DEPLOYMENT_NAME="deployment-$(date +%Y%m%d-%H%M%S)"
+echo "Deploying Bicep template (Deployment name: $DEPLOYMENT_NAME)..."
 az deployment group create \
+    --name "$DEPLOYMENT_NAME" \
     --resource-group "$RESOURCE_GROUP_NAME" \
     --template-file "$TEMPLATE_FILE" \
     --parameters "$PARAMETERS_FILE" \
@@ -57,7 +59,7 @@ if [ $? -eq 0 ]; then
     echo "Deployment outputs:"
     az deployment group show \
         --resource-group "$RESOURCE_GROUP_NAME" \
-        --name main \
+        --name "$DEPLOYMENT_NAME" \
         --query properties.outputs \
         --output table
 else
