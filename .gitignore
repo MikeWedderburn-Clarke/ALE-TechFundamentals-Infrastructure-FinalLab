@@ -1,0 +1,10 @@
+# Generated ARM templates from Bicep
+*.json
+!main.parameters.json
+
+# Azure deployment files
+.azure/
+
+# Build artifacts
+dist/
+build/
