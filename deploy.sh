@@ -73,7 +73,12 @@ if [ -n "$WEB_APP_URL" ]; then
     
     # Update config.js with actual blob container URL
     echo "Updating configuration with blob container URL..."
-    sed -i "s|BLOB_CONTAINER_URL_PLACEHOLDER|${BLOB_CONTAINER_URL}|g" webapp/config.js
+    # Use cross-platform sed compatible approach
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i '' "s|BLOB_CONTAINER_URL_PLACEHOLDER|${BLOB_CONTAINER_URL}|g" webapp/config.js
+    else
+        sed -i "s|BLOB_CONTAINER_URL_PLACEHOLDER|${BLOB_CONTAINER_URL}|g" webapp/config.js
+    fi
     
     cd webapp
     zip -q -r ../webapp.zip .
@@ -87,7 +92,11 @@ if [ -n "$WEB_APP_URL" ]; then
     rm webapp.zip
     
     # Restore the placeholder in config.js
-    sed -i "s|${BLOB_CONTAINER_URL}|BLOB_CONTAINER_URL_PLACEHOLDER|g" webapp/config.js
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i '' "s|${BLOB_CONTAINER_URL}|BLOB_CONTAINER_URL_PLACEHOLDER|g" webapp/config.js
+    else
+        sed -i "s|${BLOB_CONTAINER_URL}|BLOB_CONTAINER_URL_PLACEHOLDER|g" webapp/config.js
+    fi
     
     echo ""
     echo "✓ Web application deployed successfully!"

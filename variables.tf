@@ -33,8 +33,8 @@ variable "app_service_name" {
   default     = "app-webapp-demo"
   
   validation {
-    condition     = can(regex("^[a-z0-9-]{1,60}$", var.app_service_name))
-    error_message = "App Service name must be 1-60 characters, lowercase letters, numbers, and hyphens only."
+    condition     = can(regex("^[a-z0-9]([a-z0-9-]{0,58}[a-z0-9])?$", var.app_service_name))
+    error_message = "App Service name must be 1-60 characters, start and end with alphanumeric, can contain hyphens in between."
   }
 }
 
